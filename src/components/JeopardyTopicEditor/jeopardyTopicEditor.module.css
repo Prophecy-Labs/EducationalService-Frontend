@@ -1,0 +1,83 @@
+.topic-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    margin-right: 65px;
+}
+
+.topic-container > span {
+    margin-bottom: 30px;
+}
+
+.top-text {
+    color: #334850;
+    text-align: center;
+    font-family: NokiaKokia;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.topic-card {
+    width: 210px;
+    height: 110px;
+    color: #DBEDF3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Srbija Sans;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: normal;
+    border-radius: 15px;
+    background: #334850;
+}
+
+.topic-plus {
+    width: 210px;
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 15px;
+    background: #63757B;
+    user-select: none;
+    cursor: pointer;
+}
+
+.topic-plus > span {
+    font-weight: lighter;
+    padding: 5px 20px;
+    border-radius: 50%;
+    background-color: white;
+    color: #63757B;
+    font-size: 3rem;
+}
+
+.topic-plus:hover {
+    background-color: #414d52;
+}
+
+.delete-topic__btn {
+    width: 210px;
+    height: 110px;
+    border-radius: 15px;
+    border: none;
+    display: none;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    color:tomato;
+    background-color: rgba(0, 0, 0, 0.6);
+    text-decoration: underline;
+    font-family: Srbija Sans;
+    font-size: 2rem;
+}
+
+.topic-card:hover > .delete-topic__btn {
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+}

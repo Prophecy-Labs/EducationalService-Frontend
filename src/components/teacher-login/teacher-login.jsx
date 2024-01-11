@@ -16,21 +16,27 @@ export default function LoginForm(props) {
     } = useForm()
     const router = useRouter();
     const onSubmit = (data) => {
-        const name = data.login;
-        console.log(data);
-        fetch('/Home/auth/register', {
+        const name = data.name;
+        fetch('/api/auth/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(data)
         })
-            .then(response => response.text())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
             .then(data => {
-                //console.log(data)
-                //if (data == "successful") {
-                    router.push(`/main-page/${name}`);
-               /* } */
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("userName", name);
+                router.push(`/main-page/${data.id}`);
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
             });
     };
 
@@ -41,7 +47,7 @@ export default function LoginForm(props) {
             <input
                 id="login"
                 type="text"
-                {...register("login", { required: true })}
+                {...register("name", { required: true })}
                 className={styles.register__input}
             />
 

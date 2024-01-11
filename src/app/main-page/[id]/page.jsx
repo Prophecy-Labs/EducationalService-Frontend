@@ -8,27 +8,30 @@ import { SignalRContext } from "@/app/SignalRContext";
 import { useContext, useEffect, useState } from 'react'
 export default function MainPage({ params }) {
     //const context = useContext(SignalRContext);
-    const name = params.name;
+    const id = params.id;
+    const accessToken = localStorage.getItem("token");
     let [gameList, setGameList] = useState([]);
   
     useEffect(() => {
-        fetch('/Home/GetGameList/', {
-            method: 'POST',
+        fetch(`/api/${id}/jeopardy`, {
+            method: 'GET',
             headers: {
+                'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ Login: name })
         })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
-                setGameList(data);
+                if (data && data.length > 0) {
+                    console.log(data)
+                    setGameList(data.map(game => game.name));;
+                }
             });
     }, []);
     return(
         <>
         
-            <Header  />
+            <Header id={ id } />
             <div className={styles['container']}>
                 {gameList.map((game) => {
                     return (
@@ -37,7 +40,7 @@ export default function MainPage({ params }) {
                             gameDescr={game}
                             image={require('../../../img/jeopardy.svg')}
                             gameType="test"
-                            teacherName={ name }
+                            teacherName={ id }
                         />
                     );
                 })}

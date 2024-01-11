@@ -1,0 +1,70 @@
+@font-face {
+    font-family: NokiaKokia;
+    src: url('../../../../../fonts/NokiaKokia(RYS BY LYAJKA).ttf');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Gunterz;
+    src: url("../../../../../fonts/Gunterz-Medium.otf") format('opentype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Srbija Sans;
+    src: url("../../../../../fonts/Srbija Sans.woff2") format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+.main-container {
+    margin: 5%;
+    display: flex;
+}
+
+.top-text {
+    color: #334850;
+    text-align: center;
+    font-family: NokiaKokia;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.save__btn {
+  /*  margin: 0 5% 5% 10%;*/
+    padding: 30px 40px;
+    border: none;
+    background: #334850;
+    border-radius: 25px;
+    font-family: NokiaKokia;
+    color: white;
+    cursor: pointer;
+    user-select: none;
+}
+
+    .save__btn:hover {
+        background-color: #295363;
+    }
+
+.game-settings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 30px;
+    margin-bottom: 50px;
+}
+
+.game-name__input {
+    background-color: #295363;
+    color: white;
+    font-family: NokiaKokia;
+    padding: 15px;
+    border-radius: 15px;
+    border: 3px solid #295363;
+}

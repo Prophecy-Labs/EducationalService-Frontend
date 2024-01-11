@@ -1,0 +1,169 @@
+.modal-container {
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    background: rgba(99, 99, 99, 0.54);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    display: none;
+}
+
+.modal-container.open {
+    display: flex;
+}
+
+.modal-description {
+    position: relative;
+    display: flex;
+    padding: 40px;
+    border-radius: 25px;
+    background-color: white;
+    background-image: url('../../../public/backgroundModalJeopardy.svg');
+    background-repeat: no-repeat;
+    background-position: bottom center;
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.custom-checkbox .checkbox {
+    margin-left: 20px;
+}
+
+.custom-checkbox input {
+    display: none;
+}
+
+.checkbox {
+    position: relative;
+    border-radius: 4px;
+    width: 28px;
+    height: 26px;
+    border: 3px solid #1A353F;
+    background: none;
+}
+
+.checkmark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: auto;
+    display: none;
+}
+
+.custom-checkbox input:checked ~ .checkbox .checkmark {
+    display: block;
+}
+
+.custom-checkbox input:checked ~ .checkbox {
+    background: #1A353F;
+    border: 3px solid #1A353F;
+}
+
+.close-btn {
+    position: absolute;
+    right: 0;
+    top: 0;
+    border: none;
+    background-color: #8F8F8F;
+    padding: 10px;
+    border-radius: 0 25px 0 25px;
+    margin-left: auto;
+    user-select: none;
+    cursor: pointer;
+}
+
+.new-question,
+.new-answer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    border-radius: 15px;
+    background: #DBEDF3;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+}
+
+.new-question {
+    margin-bottom: 105px;
+}
+
+.new-answer {
+    margin-bottom: 54px;
+}
+
+.new-title {
+    color: #000;
+    font-family: NokiaKokia;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.textarea-question,
+.input-answer {
+    width: 600px;
+    padding: 10px;
+    border-radius: 10px;
+    background: none;
+    border: none;
+    resize: none;
+    margin-left: 10px;
+    margin-top: 10px;
+    color: #000;
+    font-family: Srbija Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.textarea-question:focus,
+.input-answer:focus {
+    outline: 1px solid #1A353F;
+}
+
+.form-modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.bottom-modal {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+}
+
+.custom-checkbox > label {
+    display: flex;
+    align-items: center;
+    color: #1A353F;
+    font-family: Srbija Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.submit-btn {
+    padding: 8px;
+    border-radius: 15px;
+    background: #1A353F;
+    border: none;
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    color: #64DC97;
+    text-align: center;
+    font-family: Srbija Sans;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

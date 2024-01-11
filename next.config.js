@@ -2,7 +2,7 @@
 const rewrites = () => { 
     return [
         {
-            source: "/Home/:path*",
+            source: "/api/:path*",
             destination: "http://localhost:5000/api/:path*", 
         },     
         {

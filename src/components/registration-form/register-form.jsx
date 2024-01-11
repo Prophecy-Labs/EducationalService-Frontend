@@ -16,15 +16,28 @@ export default function RegForm(props) {
 
     const onSubmit = (data) => {
         console.log(data);
-        fetch('/Home/Register/', {
+        let name = data.name;
+        fetch('/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify(data)
         })
-            .then(response => response.text())
-            .then(data => console.log(data));
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                localStorage.setItem("token", data.token);
+                localStorage.setItem("userName", name);
+                router.push(`/main-page/${data.id}`);
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+            });
     };
 
     return (
@@ -34,7 +47,7 @@ export default function RegForm(props) {
             <input
                 id="login"
                 type="text"
-                {...register("login", { required: true })}
+                {...register("name", { required: true })}
                 className={styles.register__input}
             />
 

@@ -1,0 +1,23 @@
+.top-text {
+    color: #334850;
+    text-align: center;
+    font-family: NokiaKokia;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.price-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(auto, 1fr));
+    grid-auto-flow: column;
+    margin-bottom: 40px;
+}
+
+.price-container > span {
+    width: 210px;
+}
+
+.add-window {
+    width: 210px;
+}

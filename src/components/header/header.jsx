@@ -1,10 +1,16 @@
 import React from "react";
 import styles from './header.module.css';
+import { useRouter } from 'next/navigation';
+export default function Header(props) {
+    const id = props.id;
+    const router = useRouter();
+    let handleClick = () => {
+        router.push(`/main-page/editor/${id}`)
+    }
 
-export default function Header() {
     return (
         <div className={styles.header}>
-            <button className={styles['new-game__btn']}>
+            <button className={styles['new-game__btn']} onClick={ handleClick }>
                 <span className={styles['span-btn']}>новая игра</span>
             </button>
             <ul className={styles.header__ul}>
