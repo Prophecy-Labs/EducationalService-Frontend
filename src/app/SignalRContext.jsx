@@ -9,11 +9,10 @@ export const SignalRProvider = ({ children }) => {
     const [pepegaTest, setPepegaTest] = useState("roflanebalo");
     useEffect(() => {
         const newConnection = new signalR.HubConnectionBuilder()
-            .withUrl(`/lobbyHub`, { withCredentials: false })
+            .withUrl(`http://localhost:5000/hubs/sessionHub`, { withCredentials: false })
             .build();
         setConnection(newConnection);
-        console.log("Pizdec");
-        console.log(connection);
+       
     }, []);
 
     if (!connection) {

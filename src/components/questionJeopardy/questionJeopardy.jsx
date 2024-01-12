@@ -51,7 +51,7 @@ const QuestionJeopardy = (props) => {
         connection.invoke("HandleAnswer", code, studentName, score);
     } 
 
-    const [timer, setTimer] = useState(30);
+    const [timer, setTimer] = useState(2);
 
     useEffect(() => {
         let interval;//твой таймер был написан неправильно, я переписал

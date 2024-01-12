@@ -33,6 +33,7 @@ export default function LoginForm(props) {
             .then(data => {
                 localStorage.setItem("token", data.token);
                 localStorage.setItem("userName", name);
+                localStorage.setItem("role", "teacher");
                 router.push(`/main-page/${data.id}`);
             })
             .catch(error => {

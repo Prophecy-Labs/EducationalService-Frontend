@@ -10,7 +10,9 @@ import { useParams } from 'next/navigation'
 const Jeopardy = ({ params }) => {
 
     const connection = useContext(SignalRContext);
-    const [name, code, role] = params.slug;
+    const [code, gameID] = params.slug;
+    const role = localStorage.getItem("role");
+    const name = localStorage.getItem("userName");
     //const params = useParams < { tag: string; item: string } > ()
     //все данные о игре брать с пропса или с бд
     //если пропс, то передавать лучше props.gameInformation = gameInfornation
@@ -31,35 +33,101 @@ const Jeopardy = ({ params }) => {
     const changeContent = (content) => {
         setGameContent(content);
     }; 
+
+  
+
     const [teacher, setTeacher] = useState(true);
     const [teacherName, setTeacherName] = useState(null);
     const [content, setContent] = useState(null);
+
+   // const [hasChanged, setHasChanged] = useState(false);
+
+    const [hasChanged, setHasChanged] = useState(false);
+    const [activeRound, setActiveRound] = useState(0);
+    const [GamePack, setGamePack] = useState(null);
+
+    connection.on("Notify", (data) => {
+        setTeacherName(data.userName);
+        //console.log(data.players.map(player => ({ name: player.name, score: player.score })));
+        setStudList(data.players.map(player => ({ name: player.name, score: player.score })));
+
+    });
+    connection.on("SwitchRound", () => {
+        setHasChanged(true);
+    });
+
     useEffect(() => {
-        connection.invoke("CheckUsers", code);
-        connection.on("Notify", (newMessage, teacher) => {
-            setTeacherName(teacher);
-            console.log(newMessage);
-            setStudList(newMessage);
-           
-        });
-        fetch('/Home/GetGamePack/', {
-            method: 'POST',
+        if (hasChanged) {
+            setActiveRound(activeRound => activeRound + 1);
+            console.log("Dobralis do pervoy huyni " + activeRound);
+            const timeoutId = setTimeout(() => {
+                setHasChanged(false)
+            }, 5000)
+            return () => clearTimeout(timeoutId)
+        }
+    }, [hasChanged]);
+
+    useEffect(() => {
+        console.log(activeRound);
+        if (GamePack != undefined) {
+            changeContent(GamePack[activeRound]);
+            let cards = document.querySelectorAll(".gameTable_game-card___rKrM");
+            cards.forEach(card => {
+                card.style.visibility = 'visible';
+            });
+        }
+    }, [activeRound]);
+
+    useEffect(() => {
+        if (GamePack)
+            changeContent(GamePack[0]);
+    }, [GamePack]);
+
+    useEffect(() => {
+        connection.invoke("GetHubInfo", code);
+        
+        fetch(`/api/gamepack/${gameID}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'
-            },
-            body: JSON.stringify({ login:"pepega", name:"jeopardy_test"})
+            }
+           // body: JSON.stringify({ login:"pepega", name:"jeopardy_test"})
         })
             .then(response => response.json())
             .then(data => {
-                //console.log(data)
-                const Content = {
-                    topic: data.topics.map(topic => topic.title),
-                    questions: data.topics.map(topic => topic.questions.map(questions => questions.cost)),
-                    questionsText: data.topics.map(topic => topic.questions.map(questions => questions.text)),
-                    questionsAnswers: data.topics.map(topic => topic.questions.map(questions => questions.answer))
-                }
-               // console.log(Content);
-               changeContent(Content);
+                //console.log(data.topicPacks.map(topicPack => topicPack.questionPack.map(question => question.reward)))
+                //GamePack = {
+                //    topic: data.topicPacks.map(topicPack => topicPack.topic.title),
+                //    questions: data.topicPacks.map(topicPack => topicPack.questionPack.map(question => question.reward)),
+                //    questionsText: data.topicPacks.map(topicPack => topicPack.questionPack.map(question => question.text)),
+                //    questionsAnswers: data.topicPacks.map(topicPack => topicPack.questionPack.map(question => question.answer))
+                //}
+
+                let rounds = [1, 2, 3];
+
+
+                setGamePack(
+                    rounds.map(round => {
+                    let temp = {
+                        topic: [],
+                        questions: [],
+                        questionsText: [],
+                        questionsAnswers: []
+                    };
+
+                    data.topicPacks.forEach(pack => {
+                        if (pack.topic.round === round) {
+                            temp.topic.push(pack.topic.title);
+                            temp.questions.push(pack.questionPack.map(question => question.reward));
+                            temp.questionsText.push(pack.questionPack.map(question => question.text));
+                            temp.questionsAnswers.push(pack.questionPack.map(question => question.answer));
+                        }
+                    });
+                    return temp;
+
+                }));
+                console.log(GamePack);
+               
             });
 
 

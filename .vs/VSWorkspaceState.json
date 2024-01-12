@@ -4,14 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\main-page",
-    "\\src\\app\\main-page\\editor",
     "\\src\\app\\main-page\\editor\\[...slug]",
     "\\src\\app\\main-page\\jeopardy",
     "\\src\\app\\main-page\\jeopardy\\[...slug]",
     "\\src\\components",
-    "\\src\\components\\JeopardyModalTopic",
-    "\\src\\components\\JeopardyTopicEditor"
+    "\\src\\components\\questionJeopardy",
+    "\\src\\components\\student-login",
+    "\\src\\components\\studentListJeopardy"
   ],
-  "SelectedNode": "\\src\\components\\JeopardyModalTopic\\jeopardyModalTopic.jsx",
   "PreviewInSolutionExplorer": false
 }

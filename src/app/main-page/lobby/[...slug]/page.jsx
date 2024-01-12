@@ -13,13 +13,15 @@ export default function Lobby({ params }) {
 
     const router = useRouter();
     const [students, setStudents] = useState([]);
-    const name = params.slug[0]
-    const role = params.slug[2]
+  //  const id = params.slug[0]
+    const connectionCode = params.slug[0];
+    const role = localStorage.getItem("role");
+    const name = localStorage.getItem("userName");
     const addStudent = () => {
         setStudents([...students]);
     };
     const [gameName, setGameName] = useState("");
-    const connectionCode = params.slug[1];
+    
     const gameInformation = {
         gameTitle: 'своя игра',
         setGameName: '',
@@ -29,42 +31,38 @@ export default function Lobby({ params }) {
     const connection = useContext(SignalRContext);
 
     const [teacherName, setTeacherName] = useState('');
-
+    let GameID = undefined;
     const [member, setMember] = useState(role);
     const [container, setContainer] = useState(null);
     useEffect(() => {
-
         if (connection && connection._connectionState == "Disconnected") {
             connection.start()
                 .then(() => {
-                    connection.invoke("JoinTeam", connectionCode, name, role, gameName);
-                    connection.on("Notify", (newMessage, teacher, game) => {
-                        setTeacherName(teacher);
+                    connection.invoke("JoinTeam", connectionCode, name, role);
+                    connection.on("Notify", (object) => {
+                        console.log(object);
+                        setTeacherName(object.userName);
                         students.splice(0, students.length);
-                        setGameName(game);
-                        students.push(...newMessage.map(item => item.name));
+                        setGameName(object.gameName);
+                        students.push(...object.players.map(item => item.name));
                         addStudent();
-                        console.log(teacherName);
+                        GameID = object.gameID;
+                        //console.log(teacherName);
                     });
                 });
-
-           
-          
-        }
+    }
         const startGame = () => {
             connection.invoke("StartGame", connectionCode);
         }
         connection.on("GamePush", () => {
-            //e.preventDefault();
-            
-            router.push(`/main-page/jeopardy/${name}/${connectionCode}/${role}`);
+            router.push(`/main-page/jeopardy/${connectionCode}/${GameID}`);
         })
             if (member === 'teacher') {
                 setContainer(
                     <div className="left-container">
                         <span className={styles["top-span"]}>КОД ПОДКЛЮЧЕНИЯ: {connectionCode}</span>
                         <div className={styles['game-settings']}>
-                            <button className={styles['btn-start']} onClick={startGame} >Начать сессию</button>
+                            <button className={styles['btn-start']} onClick={startGame}>Начать сессию</button>
                             <LobbyView data={gameInformation} />
                             <button className={styles['btn-end']}>закрыть сессию</button>
                         </div>

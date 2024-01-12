@@ -6,8 +6,8 @@ const rewrites = () => {
             destination: "http://localhost:5000/api/:path*", 
         },     
         {
-            source: "/lobbyHub/:path*",
-            destination: "http://localhost:5000/Lobby/:path*",
+            source: "/hubs/:path*",
+            destination: "http://localhost:5000/hubs/:path*",
         },     
     ];
 }; 

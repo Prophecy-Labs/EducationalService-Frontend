@@ -23,8 +23,8 @@ export default function MainPage({ params }) {
             .then(response => response.json())
             .then(data => {
                 if (data && data.length > 0) {
-                    console.log(data)
-                    setGameList(data.map(game => game.name));;
+                    console.log(data);
+                    setGameList(data);
                 }
             });
     }, []);
@@ -37,10 +37,11 @@ export default function MainPage({ params }) {
                     return (
                         <GameCard
                             gameName="Своя игра"
-                            gameDescr={game}
+                            gameDescr={game.name}
                             image={require('../../../img/jeopardy.svg')}
                             gameType="test"
-                            teacherName={ id }
+                            id={id}
+                            GameId={game.gameID}
                         />
                     );
                 })}

@@ -6,19 +6,23 @@ import { useRouter } from 'next/navigation';
 
 export default function GameCard(props) {
     const router = useRouter();
-    let { teacherName } = props;
+    let { id, GameId, gameDescr } = props;
+    const accessToken = localStorage.getItem("token");
+    const name = localStorage.getItem("userName");
     const handleClick = (e) => {
         e.preventDefault();
-        fetch('/Home/LobbyCreate/', {
+        //console.log({ GameId: GameId, userName: localStorage.getItem("userName") });
+        fetch(`/api/session?userName=${name}`, {
             method: 'POST',
             headers: {
+                'Authorization': `Bearer ${accessToken}`,
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: JSON.stringify({ name: props.gameDescr })
+            body: JSON.stringify({ name: gameDescr,gameID: GameId})
         })
             .then(response => response.text())
             .then(data => {
-                router.push(`/main-page/lobby/${teacherName}/${data}/teacher`)
+                router.push(`/main-page/lobby/${data}`)
             });
         
     }
