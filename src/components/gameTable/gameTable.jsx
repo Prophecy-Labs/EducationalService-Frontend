@@ -29,14 +29,14 @@ const GameTable = (props) => {
         setA(topicIndex);
         setB(questionIndex);    
     }
-    connection.on("OpenQuestion", (tIndex, qIndex) => {
-        setHasClicked(true);
+    connection.on("OpenQuestion", (tIndex, qIndex) => {  
         setContent(
             <QuestionJeopardy topicIndex={tIndex} questionIndex={qIndex} questionsList={questionsText} Answers={questionsAnswers} costList={questions} params={props.params} />
         );
         document.getElementById(`${tIndex}-${qIndex}`).style.visibility = 'hidden';
     });
     connection.on("QuestionResolve", () => {
+        setHasClicked(true);
         setContent(null)
     });
 
@@ -61,8 +61,10 @@ const GameTable = (props) => {
 
     useEffect(() => {
         console.log(counter);
-        if (counter == questions.length)
+        if (counter == questions.length) {
             connection.invoke("ChangeRound", props.params[1]);
+            setCounter(0);
+        }
     }, [counter]);
 
     return (

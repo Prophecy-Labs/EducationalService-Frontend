@@ -5,6 +5,7 @@
     display: flex;
     align-items: center;
     justify-content: right;
+    visibility: hidden;
 }
 
 .footer__span {

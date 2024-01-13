@@ -17,7 +17,8 @@ const Jeopardy = ({ params }) => {
     //все данные о игре брать с пропса или с бд
     //если пропс, то передавать лучше props.gameInformation = gameInfornation
     //потом прописать const {data} = props.gameInformation, легче будет:)
-    const gameName = 'биология 9б царство грибов';
+   // const gameName = 'биология 9б царство грибов';
+    const [gameName, setGameName] = useState("");
     const questions1 = {
         0: '100'
     }
@@ -126,8 +127,7 @@ const Jeopardy = ({ params }) => {
                     return temp;
 
                 }));
-                console.log(GamePack);
-               
+                setGameName(data.game.name);
             });
 
 
@@ -144,8 +144,8 @@ const Jeopardy = ({ params }) => {
         <>
             <Header/>
             {content}
-            <div className={styles['container']}> 
-                <p className={styles['game-title']}>{gameName}</p>
+            <div className={styles['container']}>
+                <p className={styles['game-title']}>{gameName} Раунд {activeRound+1}</p>
                 <GameTable gameContent={gameContent} params={[name, code, role]} />
                 <StudListJeopardy studList={studList} teacherName={teacherName} className={styles['stud-list']} />
             </div>

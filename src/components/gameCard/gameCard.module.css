@@ -125,3 +125,8 @@
     cursor: pointer;
     user-select: none;
 }
+
+.bottom-icon {
+    user-select: none;
+    cursor: pointer;
+}

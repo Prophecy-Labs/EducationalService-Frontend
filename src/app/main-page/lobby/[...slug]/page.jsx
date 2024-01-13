@@ -20,14 +20,16 @@ export default function Lobby({ params }) {
     const addStudent = () => {
         setStudents([...students]);
     };
-    const [gameName, setGameName] = useState("");
+   // const [gameName, setGameName] = useState("");
     
-    const gameInformation = {
-        gameTitle: 'своя игра',
-        setGameName: '',
-        description: 'своя игра - это...',
+    
+    const [gameInformation, setGameInformation] = useState(
+        {
+        gameTitle: '',
+        GameName: '',
+        description: '',
         image: require('../../../../img/jeopardy.svg'),
-    }
+    });
     const connection = useContext(SignalRContext);
 
     const [teacherName, setTeacherName] = useState('');
@@ -43,43 +45,56 @@ export default function Lobby({ params }) {
                         console.log(object);
                         setTeacherName(object.userName);
                         students.splice(0, students.length);
-                        setGameName(object.gameName);
                         students.push(...object.players.map(item => item.name));
                         addStudent();
                         GameID = object.gameID;
+                        setGameInformation(
+                            {
+                                gameTitle: 'своя игра',
+                                name: object.gameName,
+                                description: '',
+                                image: require('../../../../img/jeopardy.svg'),
+                            }
+                        );
                         //console.log(teacherName);
                     });
                 });
     }
-        const startGame = () => {
-            connection.invoke("StartGame", connectionCode);
-        }
+       
         connection.on("GamePush", () => {
             router.push(`/main-page/jeopardy/${connectionCode}/${GameID}`);
         })
-            if (member === 'teacher') {
-                setContainer(
-                    <div className="left-container">
-                        <span className={styles["top-span"]}>КОД ПОДКЛЮЧЕНИЯ: {connectionCode}</span>
-                        <div className={styles['game-settings']}>
-                            <button className={styles['btn-start']} onClick={startGame}>Начать сессию</button>
-                            <LobbyView data={gameInformation} />
-                            <button className={styles['btn-end']}>закрыть сессию</button>
-                        </div>
-                    </div>
-                );
-            } else {
-                setContainer(
-                    <div className="left-container">
-                        <span className={styles['top-span']}>Организатор: {teacherName}</span>
-                        <div className={styles['game-settings']}>
-                            <LobbyViewStud data={gameInformation} />
-                            <button className={styles['disconnect-btn']}>отключиться</button>
-                        </div>
-                    </div>
-                );
+            
+        
+    }, []);
+
+    useEffect(() => {
+        const startGame = () => {
+            connection.invoke("StartGame", connectionCode);
         }
-        }, []);
+        if (member === 'teacher') {
+            setContainer(
+                <div className="left-container">
+                    <span className={styles["top-span"]}>КОД ПОДКЛЮЧЕНИЯ: {connectionCode}</span>
+                    <div className={styles['game-settings']}>
+                        <button className={styles['btn-start']} onClick={startGame}>Начать сессию</button>
+                        <LobbyView data={gameInformation} />
+                        <button className={styles['btn-end']}>закрыть сессию</button>
+                    </div>
+                </div>
+            );
+        } else {
+            setContainer(
+                <div className="left-container">
+                    <span className={styles['top-span']}>Организатор: {teacherName}</span>
+                    <div className={styles['game-settings']}>
+                        <LobbyViewStud data={gameInformation} />
+                        <button className={styles['disconnect-btn']}>отключиться</button>
+                    </div>
+                </div>
+            );
+        }
+    }, [teacherName, gameInformation]);
 
     //заменить gameInformation = {} на {gameInformation} = props, в котором данные будут так же написаны, их можно получить в gameCard и передать в лобби.(пример такого присвоения есть в gameView.jsx)
 

@@ -10,9 +10,9 @@ import { JeopardyQuestionTable } from "@/components/JeopardyQuestionTable/jeopar
 import { JeopardyModalQuestion } from "@/components/JeopardyModalQuestion/jeopardyModalQuestion";
 import { JeopardyModalTopic } from "@/components/JeopardyModalTopic/jeopardyModalTopic";
 import { ButtonsJeopardyEditor } from "@/components/buttonsJeopardyEditor/buttonsJeopardyEditor";
-
+import { useRouter } from 'next/navigation';
 const Editor = ({ params }) => {
-   
+    const router = useRouter();
     const id = params.slug[0];
     const accessToken = localStorage.getItem("token");
     //console.log(id);
@@ -78,7 +78,7 @@ const Editor = ({ params }) => {
 
     const saveGame = () => {
         const name = document.getElementById(`name-input`).value;
-        fetch(`/api/${id}/gamepack`, {
+        fetch(`/api/gamepack/${id}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -90,8 +90,8 @@ const Editor = ({ params }) => {
         })
             .then(response => response.json())
             .then(data => {
-               
             });
+        router.push(`/main-page/${id}`);
     }
 
     const content = ['100', '200', '300', '400', '500', '600'];

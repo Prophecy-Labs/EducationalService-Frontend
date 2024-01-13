@@ -26,7 +26,7 @@ export const JeopardyQuestionTable = (props) => {
     const handleDeleteQuestion = (topicID, questionId) => {
         setQuestionText(prevQuestions => {
             const index = prevQuestions.findIndex(q => q[questionId]);
-            gamePack[activeRound][topicId].questionPack = gamePack[activeRound][topicId].questionPack.filter(function (item) {
+            gamePack[activeRound][topicID].questionPack = gamePack[activeRound][topicID].questionPack.filter(function (item) {
                 return item.questionId !== questionId;
             });
             if (index !== -1) {

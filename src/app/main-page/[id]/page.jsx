@@ -42,6 +42,8 @@ export default function MainPage({ params }) {
                             gameType="test"
                             id={id}
                             GameId={game.gameID}
+                            gameList={gameList}
+                            setGameList={setGameList}
                         />
                     );
                 })}
