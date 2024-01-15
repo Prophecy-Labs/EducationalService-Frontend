@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState, useContext } from "react";
-import Header from "@/components/header/header";
+import { HeaderLobby } from "@/components/headerLobby/HeaderLobby";
 import Footer from "@/components/footer/footer";
 import styles from './lobby.module.css';
 import StudentList from "@/components/student-list/student-list";
@@ -101,7 +101,7 @@ export default function Lobby({ params }) {
     return (
         <>
            
-            <Header />
+            <HeaderLobby />
                     <div className={styles['container']}>
                         {container}
                         <StudentList students={students} className={styles['student-list']} />

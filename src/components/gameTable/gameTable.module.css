@@ -21,6 +21,18 @@
     user-select: none;
     max-width: 330px;
 }
+.game-card-topic {
+    background: #2E393D;
+    padding: 5px 15px;
+    margin: 2px;
+    color: #DBEDF3;
+    text-align: center;
+    font-family: Gunterz;
+    font-size: 36px;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+}
 
 .questions-container {
     display: grid;

@@ -74,7 +74,7 @@ const GameTable = (props) => {
                 <div className={styles['topic-container']}>
                     {topic.map((topic, index) => {
                         return (
-                            <div className={styles['game-card']}>{topic}</div>
+                            <div className={styles['game-card-topic']}>{topic}</div>
                         );
                     })}
                 </div>

@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\app",
     "\\src\\app\\main-page",
-    "\\src\\app\\main-page\\editor\\[...slug]",
-    "\\src\\app\\main-page\\jeopardy",
-    "\\src\\app\\main-page\\jeopardy\\[...slug]",
+    "\\src\\app\\main-page\\[id]",
     "\\src\\components",
-    "\\src\\components\\questionJeopardy",
-    "\\src\\components\\student-login",
-    "\\src\\components\\studentListJeopardy"
+    "\\src\\components\\gameCard",
+    "\\src\\components\\gameTable",
+    "\\src\\components\\registration-form",
+    "\\src\\components\\student-login"
   ],
+  "SelectedNode": "\\src\\components\\gameTable\\gameTable.module.css",
   "PreviewInSolutionExplorer": false
 }

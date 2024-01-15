@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState, useContext } from "react";
 import styles from './Jeopardy.module.css';
-import Header from "@/components/header/header";
+import { HeaderLobby } from "@/components/headerLobby/HeaderLobby";
 import Footer from "@/components/footer/footer";
 import GameTable from "@/components/gameTable/gameTable";
 import StudListJeopardy from "@/components/studentListJeopardy/studentListJeopardy";
@@ -72,7 +72,7 @@ const Jeopardy = ({ params }) => {
         console.log(activeRound);
         if (GamePack != undefined) {
             changeContent(GamePack[activeRound]);
-            let cards = document.querySelectorAll(".gameTable_game-card___rKrM");
+            let cards = document.querySelectorAll(".gameTable_game-card-topic___rKrM");
             cards.forEach(card => {
                 card.style.visibility = 'visible';
             });
@@ -142,7 +142,7 @@ const Jeopardy = ({ params }) => {
 
     return (
         <>
-            <Header/>
+            <HeaderLobby />
             {content}
             <div className={styles['container']}>
                 <p className={styles['game-title']}>{gameName} Раунд {activeRound+1}</p>
