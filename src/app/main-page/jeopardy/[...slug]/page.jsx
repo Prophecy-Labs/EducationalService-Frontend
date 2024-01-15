@@ -87,7 +87,7 @@ const Jeopardy = ({ params }) => {
     useEffect(() => {
         connection.invoke("GetHubInfo", code);
         
-        fetch(`http://localhost:5000/api/gamepack/${gameID}`, {
+        fetch(`http://91.220.109.148:5000/api/gamepack/${gameID}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

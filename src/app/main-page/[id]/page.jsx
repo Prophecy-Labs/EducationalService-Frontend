@@ -13,7 +13,7 @@ export default function MainPage({ params }) {
     let [gameList, setGameList] = useState([]);
   
     useEffect(() => {
-        fetch(`http://localhost:5000/api/${id}/jeopardy`, {
+        fetch(`http://91.220.109.148:5000/api/${id}/jeopardy`, {
             method: 'GET',
             headers: {
                  Authorization: `Bearer ${accessToken}`,

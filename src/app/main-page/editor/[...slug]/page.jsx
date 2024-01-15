@@ -78,7 +78,7 @@ const Editor = ({ params }) => {
 
     const saveGame = () => {
         const name = document.getElementById(`name-input`).value;
-        fetch(`http://localhost:5000/api/gamepack/${id}`, {
+        fetch(`http://91.220.109.148:5000/api/gamepack/${id}`, {
             method: 'POST',
             headers: {
                 Authorization: `Bearer ${accessToken}`,

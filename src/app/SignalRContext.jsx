@@ -9,7 +9,7 @@ export const SignalRProvider = ({ children }) => {
     const [pepegaTest, setPepegaTest] = useState("roflanebalo");
     useEffect(() => {
         const newConnection = new signalR.HubConnectionBuilder()
-            .withUrl(`http://localhost:5000/hubs/sessionHub`, { withCredentials: false })
+            .withUrl(`http://91.220.109.148:5000/hubs/sessionHub`, { withCredentials: false })
             .build();
         setConnection(newConnection);
        

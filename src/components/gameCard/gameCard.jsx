@@ -12,7 +12,7 @@ export default function GameCard(props) {
     const handleClickLobby = (e) => {
         e.preventDefault();
         //console.log({ GameId: GameId, userName: localStorage.getItem("userName") });
-        fetch(`http://localhost:5000/api/session?userName=${name}`, {
+        fetch(`http://91.220.109.148:5000/api/session?userName=${name}`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
@@ -27,7 +27,7 @@ export default function GameCard(props) {
         
     }
     const handleClickDelete = (e) => {
-        fetch(`http://localhost:5000/api/gamepack/${GameId}`, {
+        fetch(`http://91.220.109.148:5000/api/gamepack/${GameId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${accessToken}`,
