@@ -17,7 +17,7 @@ export default function LoginForm(props) {
     const router = useRouter();
     const onSubmit = (data) => {
         const name = data.name;
-        fetch('/api/auth/signin', {
+        fetch('http://localhost:5000/api/auth/signin', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

@@ -19,6 +19,7 @@ export const JeopardyModalTopic = (props) => {
         //setGamePack(gamePack);
         console.log(gamePack);
         setNewTopic("");
+        setOpenModal(false);
     };
     
     return (
@@ -30,7 +31,7 @@ export const JeopardyModalTopic = (props) => {
                 <form className={styles['form-modal']} onSubmit={handleSubmit}>
                     <div className={styles['new-answer']}>
                         <span className={styles['new-title']}>Название темы</span>
-                        <input type='text' className={styles['input-answer']} placeholder='введите ответ на вопрос' onChange={handleInputChange} />
+                        <input type='text' className={styles['input-answer']} value={newTopic} placeholder='введите ответ на вопрос' onChange={handleInputChange} />
                     </div>
                     <button className={styles['submit-btn']} type='submit'>Применить</button>
                 </form>

@@ -13,10 +13,10 @@ export default function MainPage({ params }) {
     let [gameList, setGameList] = useState([]);
   
     useEffect(() => {
-        fetch(`/api/${id}/jeopardy`, {
+        fetch(`http://localhost:5000/api/${id}/jeopardy`, {
             method: 'GET',
             headers: {
-                'Authorization': `Bearer ${accessToken}`,
+                 Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json;charset=utf-8'
             },
         })

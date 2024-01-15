@@ -17,7 +17,7 @@ export default function RegForm(props) {
     const onSubmit = (data) => {
         console.log(data);
         let name = data.name;
-        fetch('/api/auth/register', {
+        fetch('http://localhost:5000/api/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json;charset=utf-8'

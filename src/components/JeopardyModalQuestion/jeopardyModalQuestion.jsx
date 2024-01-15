@@ -21,8 +21,9 @@ export const JeopardyModalQuestion = (props) => {
         e.preventDefault();
         gamePack[activeRound][topicId].questionPack.push({ text: newQuestion, answer: newAnswer, reward: parseInt(questionId.substr(1)), image: "", music: ""});
         questionPlus(newQuestion);
-        setNewQuestion("");
-        setNewAnswer("");
+        setNewQuestion('');
+        setNewAnswer('');
+        setOpenModal(false);
     }
     
     return (
@@ -34,11 +35,11 @@ export const JeopardyModalQuestion = (props) => {
                 <form className={styles['form-modal']} onSubmit={handleSubmit}>
                     <div className={styles['new-question']}>
                         <span className={styles['new-title']}>вопрос</span>
-                        <input className={styles['textarea-question']} placeholder="введите вопрос" onChange={handleTextareaChange} />
+                        <input className={styles['textarea-question']} value={newQuestion} placeholder="введите вопрос" onChange={handleTextareaChange} required />
                     </div>
                     <div className={styles['new-answer']}>
                         <span className={styles['new-title']}>ответ</span>
-                        <input type='text' className={styles['input-answer']} placeholder='введите ответ на вопрос' onChange={handleInputChange} />
+                        <input type='text' className={styles['input-answer']} value={newAnswer} placeholder='введите ответ на вопрос' onChange={handleInputChange} required />
                     </div>
                     <div className={styles['bottom-modal']}>
                         <div className={styles['custom-checkbox']}>

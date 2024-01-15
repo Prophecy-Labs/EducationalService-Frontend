@@ -78,10 +78,10 @@ const Editor = ({ params }) => {
 
     const saveGame = () => {
         const name = document.getElementById(`name-input`).value;
-        fetch(`/api/gamepack/${id}`, {
+        fetch(`http://localhost:5000/api/gamepack/${id}`, {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${accessToken}`,
+                Authorization: `Bearer ${accessToken}`,
                 'Content-Type': 'application/json;charset=utf-8'
             },
             body: JSON.stringify({
