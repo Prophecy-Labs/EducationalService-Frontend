@@ -1,6 +1,6 @@
 'use client'
 import React, { useEffect, useState, useContext } from "react";
-import { HeaderLobby } from "@/components/headerLobby/HeaderLobby";
+import { HeaderLobby } from "@/components/headerLobby/headerLobby";
 import Footer from "@/components/footer/footer";
 import styles from './lobby.module.css';
 import StudentList from "@/components/student-list/student-list";

@@ -1,7 +1,7 @@
 'use client'
 import React, { useEffect, useState, useContext } from "react";
 import styles from './Jeopardy.module.css';
-import { HeaderLobby } from "@/components/headerLobby/HeaderLobby";
+import { HeaderLobby } from "@/components/headerLobby/headerLobby";
 import Footer from "@/components/footer/footer";
 import GameTable from "@/components/gameTable/gameTable";
 import StudListJeopardy from "@/components/studentListJeopardy/studentListJeopardy";
